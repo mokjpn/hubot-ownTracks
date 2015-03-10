@@ -30,7 +30,11 @@ client.on('message', (topic,message) ->
       day=dt.getDate()
       hour=dt.getHours()
       min=dt.getMinutes()
-      msg =  "#{month}月#{day}日#{hour}時#{min}分 時点の現在位置は,"+geo.result.prefecture.pname+geo.result.municipality.mname+"あたりです"
+      if(geo.result)
+        curloc=geo.result.prefecture.pname+geo.result.municipality.mname+"あたりです"
+      else
+        curloc="よくわかりません"
+      msg =  "#{month}月#{day}日#{hour}時#{min}分 時点の現在位置は,"+curloc
     ).on('error',  (e) ->
       console.log("Got error: " + e.message);
     ))
